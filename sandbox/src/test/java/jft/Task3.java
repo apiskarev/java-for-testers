@@ -10,11 +10,11 @@ public class Task3 {
 
     @Test
     public void test1(){
-        Assert.assertEquals(Point.distance(a,b), 3.0);
+        Assert.assertEquals(a.distance(b), 3.0);
     }
 
     @Test
     public void test2(){
-        Assert.assertNotEquals(Point.distance(a,b), 3);
+        Assert.assertNotEquals(a.distance(b), 3);
     }
 }
