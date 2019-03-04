@@ -1,4 +1,4 @@
-package jft.task1;
+package jft;
 
 public class Point {
 

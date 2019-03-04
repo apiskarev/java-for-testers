@@ -1,6 +1,6 @@
-import jft.task1.Point;
+import jft.Point;
 
-public class FirstTask{
+public class Task2 {
 
 	public static void main(String[] args) {
 		Point a = new Point(1, 0);

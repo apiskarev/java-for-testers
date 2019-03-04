@@ -1,10 +1,9 @@
 package jft;
 
-import jft.task1.Point;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Task1 {
+public class Task3 {
 
     private Point a = new Point(1, 0);
     private Point b = new Point(1, 3);
