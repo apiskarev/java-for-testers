@@ -11,7 +11,7 @@ public class Point {
     }
 
     public static double distance(Point a, Point b){
-        return Math.sqrt((b.x - a.x) * 2 + (b.y - a.y) * 2);
+        return Math.sqrt((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y) * 1.0);
     }
 
 }
