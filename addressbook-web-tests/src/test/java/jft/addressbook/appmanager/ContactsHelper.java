@@ -22,4 +22,29 @@ public class ContactsHelper extends HelperBase{
     public void initNewContact() {
        click(By.linkText("add new"));
     }
+
+    public void selectContact() {
+        click(By.name("selected[]"));
+    }
+
+    public void editContact() {
+        click(By.cssSelector("a[href*='edit.php?']"));
+    }
+
+    public void updateContact() {
+        click(By.name("update"));
+    }
+
+    public void saveContact(){
+        click(By.name("submit"));
+    }
+
+    public void returnToContactList() {
+        click(By.linkText("home page"));
+    }
+
+    public void deleteContact(){
+        click(By.cssSelector("input[value='Delete']"));
+        if (isAlertPresent()) wd.switchTo().alert().accept();
+    }
 }

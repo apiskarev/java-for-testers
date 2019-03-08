@@ -35,10 +35,6 @@ public class ApplicationManager {
         if (wd != null) wd.quit();
     }
 
-    public void submit() {
-        groupHelper.submitGroupCreation();
-    }
-
     public GroupHelper getGroupHelper() {
         return groupHelper;
     }
