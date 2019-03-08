@@ -1,42 +1,49 @@
-package jft.addressbook;
+package jft.addressbook.appmanager;
 
+import jft.addressbook.model.ContactData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class ContactCreationTest {
+public class ApplicationManager {
 
+    private NavigationHelper navigationHelper;
     private WebDriver wd;
+    private GroupHelper groupHelper;
+    private SessionHelper sessionHelper;
 
-    @BeforeMethod(alwaysRun = true)
-    public void setUp() {
+    public void init() {
         wd = new ChromeDriver();
+        groupHelper = new GroupHelper(wd);
+        navigationHelper = new NavigationHelper(wd);
         wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
-        login("admin", "secret");
+        sessionHelper = new SessionHelper(wd);
+        sessionHelper.login("admin", "secret");
     }
 
-    private void login(String username, String password) {
-        wd.findElement(By.name("user")).clear();
-        wd.findElement(By.name("user")).sendKeys(username);
-        wd.findElement(By.name("pass")).clear();
-        wd.findElement(By.name("pass")).sendKeys(password);
-        wd.findElement(By.cssSelector("input[value=Login]")).click();
+    protected void logout() {
+        wd.findElement(By.linkText("Logout")).click();
     }
 
-    @Test
-    public void testContactCreation(ContactData contactData){
-        initNewContact();
-        fillContact(contactData);
-        submit();
+    public void stop() {
+        logout();
+        if (wd != null) wd.quit();
     }
 
-    private void fillContact(ContactData contactData) {
+    private boolean isElementPresent(By by) {
+        try {
+            wd.findElement(by);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    public void fillContact(ContactData contactData) {
         wd.findElement(By.name("firstname")).click();
         wd.findElement(By.name("firstname")).clear();
         wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstName());
@@ -57,21 +64,19 @@ public class ContactCreationTest {
         wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
     }
 
-    private void submit() {
-        wd.findElement(By.name("submit")).click();
+    public void submit() {
+        groupHelper.submitGroupCreation();
     }
 
-    private void initNewContact() {
+    public void initNewContact() {
         wd.findElement(By.linkText("add new")).click();
     }
 
-    private void logout() {
-        wd.findElement(By.linkText("Logout")).click();
+    public GroupHelper getGroupHelper() {
+        return groupHelper;
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void tearDown() {
-        logout();
-        if (wd != null) wd.quit();
+    public NavigationHelper getNavigationHelper() {
+        return navigationHelper;
     }
 }
