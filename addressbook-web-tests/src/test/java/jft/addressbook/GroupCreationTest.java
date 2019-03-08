@@ -9,7 +9,7 @@ import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
 
-public class GroupCreationTests {
+public class GroupCreationTest {
 
     private WebDriver wd;
 
