@@ -1,8 +1,10 @@
 package jft.addressbook.tests;
 
 import jft.addressbook.appmanager.ApplicationManager;
+import org.openqa.selenium.remote.BrowserType;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+
 
 public class TestBase {
 
@@ -10,7 +12,7 @@ public class TestBase {
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
-        app.init();
+        app.init(BrowserType.CHROME);
     }
 
     @AfterMethod(alwaysRun = true)
