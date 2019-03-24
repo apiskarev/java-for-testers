@@ -6,11 +6,18 @@ import org.openqa.selenium.WebDriver;
 
 public class ContactsHelper extends HelperBase{
 
-    public ContactsHelper(WebDriver wd) {
+    ContactsHelper(WebDriver wd) {
         super(wd);
     }
 
-    public void fillContact(ContactData contactData) {
+    public void makeNewContact(ContactData data) {
+        initNewContact();
+        fillContact(data);
+        saveContact();
+        returnToContactList();
+    }
+
+    private void fillContact(ContactData contactData) {
         type(By.name("firstname"), contactData.getFirstName());
         type(By.name("middlename"), contactData.getMiddleName());
         type(By.name("lastname"), contactData.getLastName());
@@ -19,23 +26,37 @@ public class ContactsHelper extends HelperBase{
         type(By.name("email"), contactData.getEmail());
     }
 
-    public void initNewContact() {
+    private void initNewContact() {
        click(By.linkText("add new"));
     }
 
     public void selectContact() {
-        click(By.name("selected[]"));
+        if (isElementPresent(By.cssSelector("tr[name=entry]"))){
+            click(By.name("selected[]"));
+        } else {
+            makeNewContact(new ContactData("John","R.","Smith",
+                    "Wall street, 19","+7 800 997 14 15", "john.smith@oracle.org"));
+            click(By.name("selected[]"));
+        }
+
     }
 
     public void editContact() {
-        click(By.cssSelector("a[href*='edit.php?']"));
+        if (isElementPresent(By.cssSelector("a[href*='edit.php?']"))){
+            click(By.cssSelector("a[href*='edit.php?']"));
+        } else {
+            makeNewContact(new ContactData("Wade","M.","Powers",
+                    "Broadway street, 14","+7 800 964 11 17","powers@void.net"));
+            click(By.cssSelector("a[href*='edit.php?']"));
+        }
     }
 
     public void updateContact() {
         click(By.name("update"));
+        returnToContactList();
     }
 
-    public void saveContact(){
+    private void saveContact(){
         click(By.name("submit"));
     }
 
@@ -43,8 +64,10 @@ public class ContactsHelper extends HelperBase{
         click(By.linkText("home page"));
     }
 
-    public void deleteContact(){
+    public void contactDelete(){
         click(By.cssSelector("input[value='Delete']"));
         if (isAlertPresent()) wd.switchTo().alert().accept();
     }
+
+
 }
