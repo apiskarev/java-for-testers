@@ -1,43 +1,65 @@
 package jft.addressbook.model;
 
-public class ContactData {
-    private final String firstName;
-    private final String middleName;
-    private final String lastName;
-    private final String address;
-    private final String homePhone;
-    private final String email;
+import java.util.Objects;
 
-    public ContactData(String firstName, String middleName, String lastName, String address, String homePhone, String email) {
+public class ContactData {
+
+    private int id;
+    private  String firstName;
+    private  String lastName;
+
+    public ContactData(String firstName, String lastName) {
+        this.id = 0;
         this.firstName = firstName;
-        this.middleName = middleName;
         this.lastName = lastName;
-        this.address = address;
-        this.homePhone = homePhone;
-        this.email = email;
+    }
+
+    public ContactData(int id, String firstName, String lastName) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public String getMiddleName() {
-        return middleName;
-    }
 
     public String getLastName() {
         return lastName;
     }
 
-    public String getAddress() {
-        return address;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactData data = (ContactData) o;
+        return id == data.id &&
+                Objects.equals(firstName, data.firstName) &&
+                Objects.equals(lastName, data.lastName);
     }
 
-    public String getHomePhone() {
-        return homePhone;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName);
     }
 
-    public String getEmail() {
-        return email;
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
     }
+
+
 }
