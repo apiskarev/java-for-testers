@@ -10,10 +10,11 @@ import java.util.List;
 
 public class ContactsHelper extends HelperBase{
 
-    ContactsHelper(WebDriver wd) {
+    public ContactsHelper(WebDriver wd) {
         super(wd);
     }
 
+<<<<<<< HEAD
     public void makeNewContact(ContactData data) {
         initNewContact();
         fillContact(data);
@@ -28,12 +29,22 @@ public class ContactsHelper extends HelperBase{
         if (contactData.getLastName() != null){
             type(By.name("lastname"), contactData.getLastName());
         }
+=======
+    public void fillContact(ContactData contactData) {
+        type(By.name("firstname"), contactData.getFirstName());
+        type(By.name("middlename"), contactData.getMiddleName());
+        type(By.name("lastname"), contactData.getLastName());
+        type(By.name("address"), contactData.getAddress());
+        type(By.name("home"), contactData.getHomePhone());
+        type(By.name("email"), contactData.getEmail());
+>>>>>>> parent of 511d59c... added required conditions for task #8
     }
 
-    private void initNewContact() {
+    public void initNewContact() {
        click(By.linkText("add new"));
     }
 
+<<<<<<< HEAD
     public void selectContact(int index) {
         if (isElementPresent(By.cssSelector("tr[name=entry]"))){
             wd.findElements(By.name("selected[]")).get(index).click();
@@ -51,14 +62,21 @@ public class ContactsHelper extends HelperBase{
             makeNewContact(new ContactData("Wade", "Powers"));
             wd.findElements(By.cssSelector("a[href*='edit.php?']")).get(index).click();
         }
+=======
+    public void selectContact() {
+        click(By.name("selected[]"));
+    }
+
+    public void editContact() {
+        click(By.cssSelector("a[href*='edit.php?']"));
+>>>>>>> parent of 511d59c... added required conditions for task #8
     }
 
     public void confirmContactUpdate() {
         click(By.name("update"));
-        returnToContactList();
     }
 
-    private void saveContact(){
+    public void saveContact(){
         click(By.name("submit"));
     }
 
@@ -66,11 +84,16 @@ public class ContactsHelper extends HelperBase{
         click(By.linkText("home"));
     }
 
+<<<<<<< HEAD
     public void deleteSelectedContacts(){
+=======
+    public void deleteContact(){
+>>>>>>> parent of 511d59c... added required conditions for task #8
         click(By.cssSelector("input[value='Delete']"));
         if (isAlertPresent()) wd.switchTo().alert().accept();
         returnToContactList();
     }
+<<<<<<< HEAD
 
 
     public int getContactsCount() {
@@ -92,4 +115,6 @@ public class ContactsHelper extends HelperBase{
         return contacts;
     }
 
+=======
+>>>>>>> parent of 511d59c... added required conditions for task #8
 }

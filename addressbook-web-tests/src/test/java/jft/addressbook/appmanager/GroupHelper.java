@@ -20,7 +20,6 @@ public class GroupHelper extends HelperBase{
 
     private void submitGroupCreation() {
         click(By.name("submit"));
-        returnToGroupPage();
     }
 
     public void fillGroupForm(GroupData groupData) {
@@ -41,9 +40,9 @@ public class GroupHelper extends HelperBase{
 
     public void deleteGroup() {
         click(By.name("delete"));
-        returnToGroupPage();
     }
 
+<<<<<<< HEAD
     public void selectGroup(int index) {
         if (isElementPresent(By.name("selected[]"))){
             wd.findElements(By.name("selected[]")).get(index).click();
@@ -54,6 +53,10 @@ public class GroupHelper extends HelperBase{
             wd.findElements(By.name("selected[]")).get(index).click();
         }
 
+=======
+    public void selectGroup() {
+        click(By.name("selected[]"));
+>>>>>>> parent of 511d59c... added required conditions for task #8
     }
 
     public void initGroupModification() {
@@ -62,7 +65,6 @@ public class GroupHelper extends HelperBase{
 
     public void submitGroupModification() {
         click(By.name("update"));
-        returnToGroupPage();
     }
 
     public void createGroup(GroupData data) {
