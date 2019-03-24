@@ -26,14 +26,14 @@ public class ApplicationManager {
             wd = new InternetExplorerDriver();
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
-        wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/");
         sessionHelper = new SessionHelper(wd);
         sessionHelper.login("admin", "secret");
         contactsHelper = new ContactsHelper(wd);
     }
 
-    private void logout() {
+    protected void logout() {
         wd.findElement(By.linkText("Logout")).click();
     }
 
