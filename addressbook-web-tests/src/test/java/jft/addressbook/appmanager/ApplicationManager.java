@@ -33,7 +33,7 @@ public class ApplicationManager {
         contactsHelper = new ContactsHelper(wd);
     }
 
-    protected void logout() {
+    private void logout() {
         wd.findElement(By.linkText("Logout")).click();
     }
 
