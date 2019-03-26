@@ -7,17 +7,11 @@ public class ContactDeletionTest extends TestBase {
 
     @Test
     public void testContactDelete(){
-        if (app.getContactsHelper().isContactPresent()){
-            app.getContactsHelper().selectContact();
-            app.getContactsHelper().contactDelete();
-        } else {
-            app.getContactsHelper().initNewContact();
-            app.getContactsHelper().fillContact(new ContactData("John","Smith"));
-            app.getContactsHelper().saveContact();
-            app.getContactsHelper().returnToContactList();
-            app.getContactsHelper().selectContact();
-            app.getContactsHelper().contactDelete();
+        if (!app.getContactsHelper().isContactPresent()){
+            app.getContactsHelper().createNewContact(new ContactData("John","Smith"));
         }
+            app.getContactsHelper().selectContact();
+            app.getContactsHelper().contactDelete();
     }
 
 }

@@ -50,4 +50,10 @@ public class GroupHelper extends HelperBase{
     public boolean isGroupPresent() {
         return isElementPresent(By.cssSelector("input[name='selected[]']"));
     }
+
+    public void makeNewGroup(GroupData data) {
+        initGroupCreation();
+        fillGroupForm(data);
+        submitGroupCreation();
+    }
 }

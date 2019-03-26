@@ -62,4 +62,11 @@ public class ContactsHelper extends HelperBase{
     public boolean isContactPresent() {
         return isElementPresent(By.cssSelector("a[href*='edit.php?']"));
     }
+
+    public void createNewContact(ContactData data) {
+        initNewContact();
+        fillContact(data);
+        saveContact();
+        returnToContactList();
+    }
 }
