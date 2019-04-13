@@ -1,12 +1,14 @@
 package jft.addressbook.appmanager;
 
 import jft.addressbook.model.ContactData;
+import jft.addressbook.model.Contacts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactsHelper extends HelperBase{
 
@@ -23,12 +25,8 @@ public class ContactsHelper extends HelperBase{
        click(By.linkText("add new"));
     }
 
-    public void selectContact(int index) {
-        wd.findElements(By.cssSelector("tr[name=entry] input")).get(index).click();
-    }
-
-    public void openContactForEdit(int index) {
-        wd.findElements(By.cssSelector("a[href*='edit.php?']")).get(index).click();
+    public void edit(int id) {
+        wd.findElement(By.cssSelector("a[href='edit.php?id="+ id +"']")).click();
     }
 
     public void updateContact() {
@@ -38,41 +36,56 @@ public class ContactsHelper extends HelperBase{
 
     public void saveContact(){
         click(By.name("submit"));
-    }
-
-    public void returnToContactList() {
-        click(By.linkText("home"));
-    }
-
-    public void contactDelete(){
-        click(By.cssSelector("input[value='Delete']"));
-        if (isAlertPresent()) wd.switchTo().alert().accept();
         returnToContactList();
     }
 
+    private void returnToContactList() {
+        click(By.linkText("home"));
+    }
 
     public boolean isContactPresent() {
         return isElementPresent(By.cssSelector("a[href*='edit.php?']"));
     }
 
-    public void createNewContact(ContactData data) {
+    public void create(ContactData data) {
         initNewContact();
         fillContact(data);
         saveContact();
+
+    }
+
+    public void modify(ContactData contact) {
+        fillContact(contact);
+        updateContact();
+    }
+
+    public void delete(ContactData contact) {
+        selectContactById(contact.getId());
+        deleteGroup();
+    }
+
+    private void selectContactById(int id) {
+        wd.findElement(By.cssSelector("input[id='"+ id +"']")).click();
+    }
+
+    private void deleteGroup(){
+        click(By.cssSelector("input[value='Delete']"));
+        if (isAlertPresent()) wd.switchTo().alert().accept();
         returnToContactList();
     }
 
-    public List<ContactData> getContactsList() {
-        List<ContactData> contacts = new ArrayList<>();
+    public Contacts all() {
+        Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         List<WebElement> tableCells = wd.findElements(By.cssSelector("tr[name=entry] td"));
         for (WebElement element : elements){
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             String lastName = tableCells.get(1).getText();
             String firstName = tableCells.get(2).getText();
-            ContactData contact = new ContactData(id, firstName, lastName);
-            contacts.add(contact);
+            contacts.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName));
         }
         return contacts;
     }
+
+
 }
