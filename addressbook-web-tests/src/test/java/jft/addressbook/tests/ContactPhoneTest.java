@@ -34,7 +34,6 @@ public class ContactPhoneTest extends TestBase {
 
     private String mergeEmails(ContactData contact) {
         return Arrays.asList(contact.getFirstEmail(), contact.getSecondEmail()).stream()
-                //.filter((s) -> s.equals(""))
                 .collect(Collectors.joining("\n"));
     }
 
