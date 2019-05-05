@@ -6,6 +6,14 @@ public class ContactData {
     private int id = Integer.MAX_VALUE;
     private String firstName;
     private String lastName;
+    private String homePhone;
+    private String mobilePhone;
+    private String workPhone;
+    private String allPhones;
+    private String address;
+    private String firstEmail;
+    private String secondEmail;
+    private String allEmails;
 
     public int getId() {
         return id;
@@ -26,12 +34,84 @@ public class ContactData {
         return this;
     }
 
+    public ContactData withHomePhone(String homePhone) {
+        this.homePhone = homePhone;
+        return this;
+    }
+
+    public ContactData withMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+        return this;
+    }
+
+    public ContactData withWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
+        return this;
+    }
+
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    public ContactData withAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public ContactData withFirstEmail(String firstEmail) {
+        this.firstEmail = firstEmail;
+        return this;
+    }
+
+    public ContactData withSecondEmail(String secondEmail){
+        this.secondEmail = secondEmail;
+        return this;
+    }
+
+    public ContactData withAllEmails(String allEmails){
+        this.allEmails = allEmails;
+        return this;
+    }
+
     public String getFirstName() {
         return firstName;
     }
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getHomePhone(){
+        return homePhone;
+    }
+
+    public String getmobilePhone(){
+        return mobilePhone;
+    }
+
+    public String getworkPhone(){
+        return workPhone;
+    }
+
+    public String getAllPhones(){
+        return allPhones;
+    }
+
+    public String getAddress(){
+        return address;
+    }
+
+    public String getFirstEmail(){
+        return firstEmail;
+    }
+
+    public String getSecondEmail(){
+        return secondEmail;
+    }
+
+    public String getAllEmails(){
+        return allEmails;
     }
 
     @Override
@@ -57,4 +137,6 @@ public class ContactData {
     public int hashCode() {
         return Objects.hash(id, firstName, lastName);
     }
+
+
 }
