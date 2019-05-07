@@ -24,6 +24,7 @@ public class ContactsHelper extends HelperBase{
         type(By.name("address2"), contactData.getAddress());
         type(By.name("email"), contactData.getFirstEmail());
         type(By.name("email2"), contactData.getSecondEmail());
+        attach(By.name("photo"), contactData.getPhoto());
     }
 
     public void initNewContact() {

@@ -1,5 +1,6 @@
 package jft.addressbook.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public class ContactData {
@@ -14,6 +15,7 @@ public class ContactData {
     private String firstEmail;
     private String secondEmail;
     private String allEmails;
+    private File photo;
 
     public int getId() {
         return id;
@@ -112,6 +114,15 @@ public class ContactData {
 
     public String getAllEmails(){
         return allEmails;
+    }
+
+    public File getPhoto() {
+        return photo;
+    }
+
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
     }
 
     @Override
