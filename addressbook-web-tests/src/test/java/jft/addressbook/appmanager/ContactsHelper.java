@@ -24,7 +24,7 @@ public class ContactsHelper extends HelperBase{
         type(By.name("address2"), contactData.getAddress());
         type(By.name("email"), contactData.getFirstEmail());
         type(By.name("email2"), contactData.getSecondEmail());
-        attach(By.name("photo"), contactData.getPhoto());
+        type(By.name("email3"), contactData.getThirdEmail());
     }
 
     public void initNewContact() {
@@ -93,13 +93,11 @@ public class ContactsHelper extends HelperBase{
         List<WebElement> tableCells = wd.findElements(By.cssSelector("tr[name=entry] td"));
         for (WebElement element : elements){
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            String lastName = tableCells.get(1).getText();
+            String lastName  = tableCells.get(1).getText();
             String firstName = tableCells.get(2).getText();
-            String address = tableCells.get(3).getText();
             String allEmails = tableCells.get(4).findElements(By.tagName("a")).stream().map(WebElement::getText).collect(Collectors.joining("\n"));
             String allPhones = tableCells.get(5).getText();
-            contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName)
-                    .withAddress(address).withAllEmails(allEmails).withAllPhones(allPhones));
+            contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName).withAllEmails(allEmails).withAllPhones(allPhones));
         }
         return new Contacts(contactCache);
     }
@@ -114,11 +112,12 @@ public class ContactsHelper extends HelperBase{
         String work = wd.findElement(By.name("work")).getAttribute("value");
         String firstEmail = wd.findElement(By.name("email")).getAttribute("value");
         String secondEmail = wd.findElement(By.name("email2")).getAttribute("value");
+        String thirdEmail = wd.findElement(By.name("email3")).getAttribute("value");
         String address = wd.findElement(By.name("address2")).getAttribute("value");
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withFirstName(firstName).withLastName(lastName)
                 .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
-                .withFirstEmail(firstEmail).withSecondEmail(secondEmail)
+                .withFirstEmail(firstEmail).withSecondEmail(secondEmail).withThirdEmail(thirdEmail)
                 .withAddress(address);
     }
 
