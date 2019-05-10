@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ContactsHelper extends HelperBase{
 
@@ -25,6 +26,7 @@ public class ContactsHelper extends HelperBase{
         type(By.name("email"), contactData.getFirstEmail());
         type(By.name("email2"), contactData.getSecondEmail());
         type(By.name("email3"), contactData.getThirdEmail());
+        attach(By.name("photo"), contactData.getPhoto());
     }
 
     public void initNewContact() {
@@ -90,15 +92,15 @@ public class ContactsHelper extends HelperBase{
         }
         contactCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
-        List<WebElement> tableCells = wd.findElements(By.cssSelector("tr[name=entry] td"));
-        for (WebElement element : elements){
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            String lastName  = tableCells.get(1).getText();
+        IntStream.range(0, elements.size()).forEach(i -> {
+            List<WebElement> tableCells = wd.findElements(By.cssSelector("tr[name=entry]:nth-of-type(" + (i + 2) + ") td"));
+            int id = Integer.parseInt(elements.get(i).findElement(By.tagName("input")).getAttribute("value"));
+            String lastName = tableCells.get(1).getText();
             String firstName = tableCells.get(2).getText();
             String allEmails = tableCells.get(4).findElements(By.tagName("a")).stream().map(WebElement::getText).collect(Collectors.joining("\n"));
             String allPhones = tableCells.get(5).getText();
             contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName).withAllEmails(allEmails).withAllPhones(allPhones));
-        }
+        });
         return new Contacts(contactCache);
     }
 
