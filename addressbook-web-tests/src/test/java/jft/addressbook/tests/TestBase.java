@@ -2,20 +2,20 @@ package jft.addressbook.tests;
 
 import jft.addressbook.appmanager.ApplicationManager;
 import org.openqa.selenium.remote.BrowserType;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 
 public class TestBase {
 
-    protected final static ApplicationManager app = new ApplicationManager();
+    protected final ApplicationManager app = new ApplicationManager();
 
-    @BeforeSuite(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     public void setUp() {
         app.init(BrowserType.CHROME);
     }
 
-    @AfterSuite(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
         app.stop();
     }

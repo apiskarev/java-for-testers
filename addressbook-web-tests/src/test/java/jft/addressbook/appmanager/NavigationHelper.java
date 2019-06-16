@@ -9,7 +9,7 @@ public class NavigationHelper extends HelperBase{
         super(wd);
     }
 
-    public void groupPage() {
+    public void gotoGroupsPage() {
         click(By.linkText("groups"));
     }
 }

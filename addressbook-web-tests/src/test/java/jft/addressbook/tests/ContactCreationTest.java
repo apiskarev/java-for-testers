@@ -1,50 +1,29 @@
 package jft.addressbook.tests;
 
-import com.google.common.reflect.TypeToken;
-import com.google.gson.Gson;
 import jft.addressbook.model.ContactData;
-import jft.addressbook.model.Contacts;
-import jft.addressbook.model.GroupData;
-import org.testng.annotations.DataProvider;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Iterator;
+import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTest extends TestBase{
 
-    @DataProvider
-    public Iterator<Object[]> validContactsFromJson() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")));
-        String json = "";
-        String line = reader.readLine();
-        while (line != null){
-            json += line;
-            line = reader.readLine();
-        }
-        Gson gson = new Gson();
-        List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>(){}.getType());
-        return contacts.stream().map(g -> new Object[]{g}).collect(Collectors.toList()).iterator();
+    @Test
+    public void testContactCreation(){
+        List<ContactData> before = app.getContactsHelper().getContactsList();
+        ContactData contact = new ContactData("John","Smith");
+        app.getContactsHelper().createNewContact(contact);
+        List<ContactData> after = app.getContactsHelper().getContactsList();
+        Assert.assertEquals(after.size(), before.size() + 1);
+
+        before.add(contact);
+        Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
+        before.sort(byId);
+        after.sort(byId);
+        Assert.assertEquals(after, before);
     }
 
-    @Test(dataProvider = "validContactsFromJson")
-    public void testContactCreation(ContactData contact){
-        Contacts before = app.contact().all();
-        contact.withPhoto(new File("src/test/resources/stru.png"));
-        app.contact().create(contact);
-        Contacts after = app.contact().all();
-        assertThat(after.size(), equalTo(before.size() + 1));
 
-        assertThat(after, equalTo(
-                before.withAdded(contact.withId(after.stream().mapToInt(c -> c.getId()).max().getAsInt()))));
-    }
 
 }

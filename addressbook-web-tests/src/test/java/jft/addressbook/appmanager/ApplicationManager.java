@@ -42,15 +42,15 @@ public class ApplicationManager {
         if (wd != null) wd.quit();
     }
 
-    public GroupHelper group() {
+    public GroupHelper getGroupHelper() {
         return groupHelper;
     }
 
-    public NavigationHelper goTo() {
+    public NavigationHelper getNavigationHelper() {
         return navigationHelper;
     }
 
-    public ContactsHelper contact() {
+    public ContactsHelper getContactsHelper() {
         return contactsHelper;
     }
 }
