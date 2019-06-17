@@ -1,29 +1,24 @@
 package jft.addressbook.tests;
 
 import jft.addressbook.model.ContactData;
-import org.testng.Assert;
+import jft.addressbook.model.Contacts;
 import org.testng.annotations.Test;
 
-import java.util.Comparator;
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTest extends TestBase{
 
     @Test
     public void testContactCreation(){
-        List<ContactData> before = app.getContactsHelper().getContactsList();
-        ContactData contact = new ContactData("John","Smith");
-        app.getContactsHelper().createNewContact(contact);
-        List<ContactData> after = app.getContactsHelper().getContactsList();
-        Assert.assertEquals(after.size(), before.size() + 1);
+        Contacts before = app.contact().all();
+        ContactData contact = new ContactData().withFirstName("John").withLastName("Smith");
+        app.contact().create(contact);
+        Contacts after = app.contact().all();
+        assertThat(after.size(), equalTo(before.size() + 1));
 
-        before.add(contact);
-        Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-        before.sort(byId);
-        after.sort(byId);
-        Assert.assertEquals(after, before);
+        assertThat(after, equalTo(
+                before.withAdded(contact.withId(after.stream().mapToInt(c -> c.getId()).max().getAsInt()))));
     }
-
-
 
 }

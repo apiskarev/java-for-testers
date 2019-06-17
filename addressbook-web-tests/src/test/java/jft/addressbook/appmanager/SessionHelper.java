@@ -3,9 +3,9 @@ package jft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-class SessionHelper extends HelperBase{
+public class SessionHelper extends HelperBase{
 
-    SessionHelper(WebDriver wd) {
+    public SessionHelper(WebDriver wd) {
         super(wd);
     }
 
@@ -14,5 +14,4 @@ class SessionHelper extends HelperBase{
         type(By.name("pass"), password);
         click(By.cssSelector("input[value=Login]"));
     }
-
 }

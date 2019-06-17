@@ -3,28 +3,27 @@ package jft.addressbook.model;
 import java.util.Objects;
 
 public class ContactData {
-    private int id;
-    private final String firstName;
-    private final String lastName;
-
-    public ContactData(String firstName, String lastName) {
-        this.id = Integer.MAX_VALUE;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    public ContactData(int id, String firstName, String lastName) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+    private int id = Integer.MAX_VALUE;
+    private String firstName;
+    private String lastName;
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public ContactData withId(int id) {
         this.id = id;
+        return this;
+    }
+
+    public ContactData withLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public ContactData withFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
     }
 
     public String getFirstName() {
@@ -38,7 +37,8 @@ public class ContactData {
     @Override
     public String toString() {
         return "ContactData{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
     }
@@ -48,13 +48,13 @@ public class ContactData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ContactData data = (ContactData) o;
-        return Objects.equals(firstName, data.firstName) &&
+        return id == data.id &&
+                Objects.equals(firstName, data.firstName) &&
                 Objects.equals(lastName, data.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName);
+        return Objects.hash(id, firstName, lastName);
     }
-
 }
