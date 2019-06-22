@@ -1,20 +1,37 @@
 package jft.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+
+import java.io.File;
 import java.util.Objects;
 
 public class ContactData {
     private int id = Integer.MAX_VALUE;
+
+    @Expose
     private String firstName;
+    @Expose
     private String lastName;
+    @Expose
     private String homePhone;
+    @Expose
     private String mobilePhone;
+    @Expose
     private String workPhone;
+    //@Expose
     private String allPhones;
+    @Expose
     private String address;
+    @Expose
     private String firstEmail;
+    @Expose
     private String secondEmail;
+    @Expose
     private String thirdEmail;
+    //@Expose
     private String allEmails;
+
+    private File photo;
 
     public int getId() {
         return id;
@@ -116,12 +133,21 @@ public class ContactData {
         return secondEmail;
     }
 
+    public String getThirdEmail() {
+        return thirdEmail;
+    }
+
     public String getAllEmails(){
         return allEmails;
     }
 
-    public String getThirdEmail() {
-        return thirdEmail;
+    public File getPhoto() {
+        return photo;
+    }
+
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
+        return this;
     }
 
     @Override
@@ -130,6 +156,13 @@ public class ContactData {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", homePhone='" + homePhone + '\'' +
+                ", mobilePhone='" + mobilePhone + '\'' +
+                ", workPhone='" + workPhone + '\'' +
+                ", address='" + address + '\'' +
+                ", firstEmail='" + firstEmail + '\'' +
+                ", secondEmail='" + secondEmail + '\'' +
+                ", thirdEmail='" + thirdEmail + '\'' +
                 '}';
     }
 
