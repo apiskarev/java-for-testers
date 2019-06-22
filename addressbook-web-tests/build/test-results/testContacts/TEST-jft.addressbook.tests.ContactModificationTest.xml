@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="jft.addressbook.tests.ContactModificationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-06-22T15:18:24" hostname="Alexander-PC" time="0.71">
+  <properties/>
+  <testcase name="testContactModification" classname="jft.addressbook.tests.ContactModificationTest" time="0.71"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

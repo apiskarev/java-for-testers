@@ -12,4 +12,8 @@ public class NavigationHelper extends HelperBase{
     public void groupPage() {
         click(By.linkText("groups"));
     }
+
+    public void contactPage() {
+        wd.get(System.getProperty("web.baseUrl"));
+    }
 }

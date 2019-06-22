@@ -5,14 +5,16 @@ import org.openqa.selenium.remote.BrowserType;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
+import java.io.IOException;
+
 
 public class TestBase {
 
-    protected final static ApplicationManager app = new ApplicationManager();
+    static final ApplicationManager app = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
 
     @BeforeSuite(alwaysRun = true)
-    public void setUp() {
-        app.init(BrowserType.CHROME);
+    public void setUp() throws IOException {
+        app.init();
     }
 
     @AfterSuite(alwaysRun = true)

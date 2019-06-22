@@ -5,8 +5,7 @@ import com.google.gson.Gson;
 import jft.addressbook.model.ContactData;
 import jft.addressbook.model.Contacts;
 import jft.addressbook.model.GroupData;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.io.BufferedReader;
 import java.io.File;

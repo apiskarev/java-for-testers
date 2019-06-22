@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="jft.addressbook.tests.GroupCreationTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2019-06-22T14:34:25" hostname="Alexander-PC" time="4.006">
+  <properties/>
+  <testcase name="testGroupCreation[0](GroupData{id=2147483647, name='test 0'})" classname="jft.addressbook.tests.GroupCreationTest" time="1.717"/>
+  <testcase name="testGroupCreation[1](GroupData{id=2147483647, name='test 1'})" classname="jft.addressbook.tests.GroupCreationTest" time="1.15"/>
+  <testcase name="testGroupCreation[2](GroupData{id=2147483647, name='test 2'})" classname="jft.addressbook.tests.GroupCreationTest" time="1.138"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

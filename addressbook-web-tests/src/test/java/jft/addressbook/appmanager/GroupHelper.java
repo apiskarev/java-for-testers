@@ -43,11 +43,11 @@ public class GroupHelper extends HelperBase{
     }
 
     public void modify(GroupData group) {
-        selectGroupById(group.getId());
-        initGroupModification();
-        fillGroupForm(group);
-        submitGroupModification();
-        groupCache = null;
+            selectGroupById(group.getId());
+            initGroupModification();
+            fillGroupForm(group);
+            submitGroupModification();
+            groupCache = null;
     }
 
     public void delete(GroupData group) {

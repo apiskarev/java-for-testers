@@ -65,7 +65,7 @@ public class ContactDataGenerator {
                             .withFirstEmail(String.format("john%s@smith.org", i))
                             .withSecondEmail(String.format("j.smith198%s@gmail.com", i))
                             .withThirdEmail(String.format("john198%s@gmail.com", i))
-                    );
+            );
         }
         return contacts;
     }

@@ -93,7 +93,7 @@ public class ContactsHelper extends HelperBase{
         contactCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         int bound = elements.size();
-        for (int i = 0; i < bound; i++) {
+        IntStream.range(0, bound).forEach(i -> {
             List<WebElement> tableCells = elements.get(i).findElements(By.cssSelector("td"));
             int id = Integer.parseInt(elements.get(i).findElement(By.tagName("input")).getAttribute("value"));
             String lastName = tableCells.get(1).getText();
@@ -101,7 +101,7 @@ public class ContactsHelper extends HelperBase{
             String allEmails = tableCells.get(4).findElements(By.tagName("a")).stream().map(WebElement::getText).collect(Collectors.joining("\n"));
             String allPhones = tableCells.get(5).getText();
             contactCache.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName).withAllEmails(allEmails).withAllPhones(allPhones));
-        }
+        });
         return new Contacts(contactCache);
     }
 

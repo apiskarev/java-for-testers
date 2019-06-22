@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="jft.addressbook.tests.ContactCreationTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2019-06-22T15:18:19" hostname="Alexander-PC" time="5.032">
+  <properties/>
+  <testcase name="testContactCreation[0](ContactData{id=2147483647, firstName='firstName 0', lastName='lastName 0', homePhone='+650 65 54 0', mobilePhone='+(99)66 421 564 0', workPhone='9851 3212 1320', address='Wall Stret 19, flat 0', firstEmail='john0@smith.org', secondEmail='j.smith1980@gmail.com', thirdEmail='john1980@gmail.com'})" classname="jft.addressbook.tests.ContactCreationTest" time="1.726"/>
+  <testcase name="testContactCreation[1](ContactData{id=2147483647, firstName='firstName 1', lastName='lastName 1', homePhone='+650 65 54 1', mobilePhone='+(99)66 421 564 1', workPhone='9851 3212 1321', address='Wall Stret 19, flat 1', firstEmail='john1@smith.org', secondEmail='j.smith1981@gmail.com', thirdEmail='john1981@gmail.com'})" classname="jft.addressbook.tests.ContactCreationTest" time="1.557"/>
+  <testcase name="testContactCreation[2](ContactData{id=2147483647, firstName='firstName 2', lastName='lastName 2', homePhone='+650 65 54 2', mobilePhone='+(99)66 421 564 2', workPhone='9851 3212 1322', address='Wall Stret 19, flat 2', firstEmail='john2@smith.org', secondEmail='j.smith1982@gmail.com', thirdEmail='john1982@gmail.com'})" classname="jft.addressbook.tests.ContactCreationTest" time="1.748"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
