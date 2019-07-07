@@ -6,6 +6,7 @@
             <class name="jft.addressbook.tests.ContactCreationTest"/>
             <class name="jft.addressbook.tests.ContactModificationTest"/>
             <class name="jft.addressbook.tests.ContactDeletionTest"/>
+            <class name="jft.addressbook.tests.ContactAddToGroupTest"/>
         </classes>
     </test>
 </suite>

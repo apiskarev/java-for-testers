@@ -5,6 +5,8 @@ import jft.addressbook.model.Contacts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +31,7 @@ public class ContactsHelper extends HelperBase{
         attach(By.name("photo"), contactData.getPhoto());
     }
 
-    public void initNewContact() {
+    private void initNewContact() {
        click(By.linkText("add new"));
     }
 
@@ -37,12 +39,12 @@ public class ContactsHelper extends HelperBase{
         wd.findElement(By.cssSelector("a[href='edit.php?id="+ id +"']")).click();
     }
 
-    public void updateContact() {
+    private void updateContact() {
         click(By.name("update"));
         returnToContactList();
     }
 
-    public void saveContact(){
+    private void saveContact(){
         click(By.name("submit"));
         returnToContactList();
     }
@@ -130,5 +132,32 @@ public class ContactsHelper extends HelperBase{
 
     public int count() {
         return wd.findElements(By.name("selected[]")).size();
+    }
+
+    private void ensureContactOperationDone(ContactData contactToAdd) {
+        wd.findElement(By.xpath("//h1[text()='Groups']"));
+        Assert.assertTrue(isElementPresent(By.linkText("group page \"" + contactToAdd.getGroups().iterator().next().getName() + "\"")));
+    }
+
+    public void addToGroup(ContactData contactToAdd) {
+        Assert.assertEquals(contactToAdd.getGroups().size(), 1);
+        selectContactById(contactToAdd.getId());
+        Select groupSelector = new Select(wd.findElement(By.name("to_group")));
+        groupSelector.selectByVisibleText(contactToAdd.getGroups().iterator().next().getName());
+        wd.findElement(By.cssSelector("input[type=submit]")).click();
+        ensureContactOperationDone(contactToAdd);
+    }
+
+    private void getGroupView(ContactData contact) {
+        Assert.assertEquals(contact.getGroups().size(), 1);
+        Select groupSelect = new Select(wd.findElement(By.name("group")));
+        groupSelect.selectByVisibleText(contact.getGroups().iterator().next().getName());
+    }
+
+    public void removeContactFromGroup(ContactData contact){
+        getGroupView(contact);
+        selectContactById(contact.getId());
+        wd.findElement(By.name("remove")).click();
+        ensureContactOperationDone(contact);
     }
 }

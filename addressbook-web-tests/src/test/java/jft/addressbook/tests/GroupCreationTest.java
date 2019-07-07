@@ -6,8 +6,6 @@ import com.thoughtworks.xstream.XStream;
 import jft.addressbook.model.GroupData;
 import jft.addressbook.model.Groups;
 import org.testng.annotations.*;
-
-
 import java.io.*;
 import java.util.Iterator;
 import java.util.List;

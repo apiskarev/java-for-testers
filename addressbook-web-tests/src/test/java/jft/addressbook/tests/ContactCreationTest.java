@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import jft.addressbook.model.ContactData;
 import jft.addressbook.model.Contacts;
 import jft.addressbook.model.GroupData;
+import jft.addressbook.model.Groups;
 import org.testng.annotations.*;
 
 import java.io.BufferedReader;
@@ -34,10 +35,21 @@ public class ContactCreationTest extends TestBase{
         return contacts.stream().map(g -> new Object[]{g}).collect(Collectors.toList()).iterator();
     }
 
+    private Groups groups;
+
+    @BeforeTest
+    public void ensurePreconditions(){
+        groups = app.db().groups();
+        if (groups.size() == 0){
+            app.goTo().groupPage();
+            app.group().create(new GroupData().withName("test1"));
+        }
+    }
+
     @Test(dataProvider = "validContactsFromJson")
     public void testContactCreation(ContactData contact){
         Contacts before = app.db().contacts();
-        contact.withPhoto(new File("src/test/resources/stru.png"));
+        contact.withPhoto(new File("src/test/resources/stru.png")).inGroup(groups.iterator().next());
         app.contact().create(contact);
         Contacts after = app.db().contacts();
         assertThat(after.size(), equalTo(before.size() + 1));
