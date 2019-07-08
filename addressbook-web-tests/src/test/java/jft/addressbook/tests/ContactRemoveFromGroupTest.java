@@ -3,6 +3,7 @@ package jft.addressbook.tests;
 import jft.addressbook.model.ContactData;
 import jft.addressbook.model.Contacts;
 import jft.addressbook.model.GroupData;
+import jft.addressbook.model.Groups;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -40,10 +41,10 @@ public class ContactRemoveFromGroupTest extends TestBase {
 
     @Test
     public void removeContactFromGroup(){
-        Contacts before = app.db().contacts();
+        Groups before = contactToRemove.getGroups();
         app.goTo().contactPage();
         app.contact().removeContactFromGroup(contactToRemove);
-        Contacts after = app.db().contacts();
-        assertThat(before, equalTo(after.without(contactToRemove).withAdded(contactToRemove.cleanGroup())));
+        Groups after = contactToRemove.getGroups();
+        assertThat(before, equalTo(after.withAdded(contactToRemove.getGroups().iterator().next())));
     }
 }

@@ -37,11 +37,10 @@ public class ContactAddToGroupTest extends TestBase {
     @Test
     public void addContactToGroup(){
         app.goTo().contactPage();
-        Contacts before = contacts;
-        ContactData contactToAdd = before.iterator().next();
-        ContactData addedContact = contactToAdd.inGroup(groups.iterator().next());
-        app.contact().addToGroup(contactToAdd);
-        Contacts after = app.db().contacts();
-        assertThat(before, equalTo(after.without(contactToAdd).withAdded(addedContact)));
+        ContactData contactToAdd = contacts.iterator().next();
+        Groups before = contactToAdd.getGroups();
+        app.contact().addToGroup(contactToAdd.inGroup(groups.iterator().next()));
+        Groups after = contactToAdd.getGroups();
+        assertThat(before.withAdded(contactToAdd.getGroups().iterator().next()), equalTo(after));
     }
 }
