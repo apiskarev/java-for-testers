@@ -228,8 +228,4 @@ public class ContactData {
         return this;
     }
 
-    public ContactData cleanGroup() {
-        groups.remove(getGroups().iterator().next());
-        return this;
-    }
 }
