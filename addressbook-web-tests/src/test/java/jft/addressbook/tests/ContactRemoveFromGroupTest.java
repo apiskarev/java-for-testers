@@ -1,11 +1,8 @@
 package jft.addressbook.tests;
 
 import jft.addressbook.model.ContactData;
-import jft.addressbook.model.Contacts;
 import jft.addressbook.model.GroupData;
-import jft.addressbook.model.Groups;
 import org.hamcrest.CoreMatchers;
-import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
