@@ -50,9 +50,11 @@ public class HttpSession {
     }
 
     public boolean isLoggedAs(String username) throws IOException {
-        HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + "/index.php");
+        HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + "/account_page.php");
         CloseableHttpResponse response = httpClient.execute(get);
         String body = getTextFrom(response);
+            System.out.println(username);
+            System.out.println(body);
         return body.contains(String.format("<a href=\"/mantis/account_page.php\">%s</a>", username));
     }
 

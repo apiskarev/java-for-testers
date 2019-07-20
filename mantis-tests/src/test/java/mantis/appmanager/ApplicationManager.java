@@ -17,12 +17,18 @@ public class ApplicationManager {
     private final Properties properties;
     private RegistrationHelper registrationHelper;
     private FtpHelper ftp;
+    private MailHelper mail;
+    private JamesHelper jamesHelper;
+    private NavigationHelper navigationHelper;
+    private UIHelper uiHelper;
 
     private WebDriver wd;
+    private DbHelper dbHelper;
 
     public ApplicationManager(String browser){
         this.browser = browser;
         properties = new Properties();
+        dbHelper = new DbHelper();
     }
 
     private String browser;
@@ -56,6 +62,36 @@ public class ApplicationManager {
             ftp = new FtpHelper(this);
         }
         return ftp;
+    }
+
+    public MailHelper mail(){
+        if (mail == null) {
+            mail = new MailHelper(this);
+        }
+        return mail;
+    }
+
+    public JamesHelper james(){
+        if (jamesHelper == null){
+            jamesHelper = new JamesHelper(this);
+        }
+        return jamesHelper;
+    }
+
+    public NavigationHelper navigate(){
+        if (navigationHelper == null){
+            navigationHelper = new NavigationHelper(this);
+        }
+        return navigationHelper;
+    }
+
+    public UIHelper ui(){
+        if (uiHelper == null) uiHelper = new UIHelper(this);
+        return uiHelper;
+    }
+
+    public DbHelper db(){
+        return dbHelper;
     }
 
     WebDriver getDriver() {
