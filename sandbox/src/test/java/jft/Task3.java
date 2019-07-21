@@ -1,7 +1,9 @@
 package jft;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotEquals;
 
 public class Task3 {
 
@@ -10,16 +12,16 @@ public class Task3 {
 
     @Test
     public void test1(){
-        Assert.assertEquals(a.distance(b), 3.0);
+        assertEquals(a.distance(b), 3.0);
     }
 
     @Test
     public void test2(){
-        Assert.assertNotEquals(a.distance(b), 3);
+        assertNotEquals(a.distance(b), 3);
     }
 
     @Test
     public void incorrectTest(){
-        Assert.assertNotEquals(a.distance(b), 4);
+        assertEquals(a.distance(b), 4);
     }
 }
