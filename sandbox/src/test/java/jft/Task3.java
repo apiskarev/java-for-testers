@@ -19,9 +19,5 @@ public class Task3 {
     public void test2(){
         assertNotEquals(a.distance(b), 3);
     }
-
-    @Test
-    public void incorrectTest(){
-        assertEquals(a.distance(b), 4);
-    }
+    
 }
